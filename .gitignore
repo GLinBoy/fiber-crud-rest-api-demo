@@ -418,3 +418,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/go,windows,linux,macos,visualstudiocode,goland,goland+all,goland+iml,vim,emacs
 
 tmp/*
+database.db

@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/glinboy/fiber-crud-rest-api-demo/model"
 	"gorm.io/gorm"
 )
@@ -20,6 +22,19 @@ func (b BookRepositoryImpl) FindAll() []model.Book {
 		panic(result.Error)
 	}
 	return books
+}
+
+func (b BookRepositoryImpl) FindById(id int) (model.Book, error) {
+	var book model.Book
+	result := b.DB.Find(&book, id)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+	if result != nil {
+		return book, nil
+	} else {
+		return book, errors.New("Book not found")
+	}
 }
 
 func (b BookRepositoryImpl) Save(book model.Book) {

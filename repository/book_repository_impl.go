@@ -19,3 +19,10 @@ func (b BookRepositoryImpl) Save(book model.Book) {
 		panic(result.Error)
 	}
 }
+
+func (b BookRepositoryImpl) Update(book model.Book) {
+	result := b.DB.Save(&book)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+}

@@ -18,3 +18,11 @@ func NewBookServiceImpl(bookRepository repository.BookRepository) BookService {
 func (b BookServiceImpl) FindAll() []model.Book {
 	return b.BookRepository.FindAll()
 }
+
+func (b BookServiceImpl) FindById(id int) model.Book {
+	book, err := b.BookRepository.FindById(id)
+	if err != nil {
+		panic(err)
+	}
+	return book
+}

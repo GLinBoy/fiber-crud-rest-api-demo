@@ -26,3 +26,11 @@ func (b BookRepositoryImpl) Update(book model.Book) {
 		panic(result.Error)
 	}
 }
+
+func (b BookRepositoryImpl) Delete(id int) {
+	var book model.Book
+	result := b.DB.Where("id = ?").Delete(&book)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+}

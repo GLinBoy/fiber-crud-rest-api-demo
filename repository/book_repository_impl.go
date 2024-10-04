@@ -13,6 +13,15 @@ func NewBookRepositoryImpl(DB *gorm.DB) BookRepository {
 	return &BookRepositoryImpl{DB: DB}
 }
 
+func (b BookRepositoryImpl) FindAll() []model.Book {
+	var books []model.Book
+	result := b.DB.Find(&books)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+	return books
+}
+
 func (b BookRepositoryImpl) Save(book model.Book) {
 	result := b.DB.Create(&book)
 	if result.Error != nil {

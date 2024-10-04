@@ -26,3 +26,7 @@ func (b BookServiceImpl) FindById(id int) model.Book {
 	}
 	return book
 }
+
+func (b BookServiceImpl) Save(book model.Book) {
+	b.BookRepository.Save(book)
+}

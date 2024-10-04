@@ -30,3 +30,7 @@ func (b BookServiceImpl) FindById(id int) model.Book {
 func (b BookServiceImpl) Save(book model.Book) {
 	b.BookRepository.Save(book)
 }
+
+func (b BookServiceImpl) Update(book model.Book) {
+	b.BookRepository.Update(book)
+}

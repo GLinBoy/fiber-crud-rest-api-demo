@@ -8,4 +8,10 @@ func NewRouter(router fiber.Router) {
 		return c.SendString("Hello, Fiber!")
 	})
 
+	router.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"msg": "Path doesn't exist",
+		})
+	})
+
 }

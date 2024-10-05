@@ -1,8 +1,11 @@
 package router
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/glinboy/fiber-crud-rest-api-demo/service"
+	"github.com/gofiber/fiber/v2"
+)
 
-func NewRouter(router fiber.Router) {
+func NewRouter(router fiber.Router, bookService service.BookService) {
 
 	router.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, Fiber!")
@@ -12,6 +15,15 @@ func NewRouter(router fiber.Router) {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"msg": "Path doesn't exist",
 		})
+	})
+
+	api := router.Group("/api")
+
+	books := api.Group("/books")
+
+	books.Get("", func(c *fiber.Ctx) error {
+		books := bookService.FindAll()
+		return c.JSON(books)
 	})
 
 }

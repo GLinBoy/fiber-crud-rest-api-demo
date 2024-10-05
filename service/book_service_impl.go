@@ -34,3 +34,7 @@ func (b BookServiceImpl) Save(book model.Book) {
 func (b BookServiceImpl) Update(book model.Book) {
 	b.BookRepository.Update(book)
 }
+
+func (b BookServiceImpl) Delete(id int) {
+	b.BookRepository.Delete(id)
+}

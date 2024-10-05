@@ -1,9 +1,8 @@
 package config
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/jinzhu/gorm/dialects/sqlite"
 	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 func DatabaseConnection() *gorm.DB {

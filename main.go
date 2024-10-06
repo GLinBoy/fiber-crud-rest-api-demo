@@ -13,7 +13,7 @@ func main() {
 
 	db := config.DatabaseConnection()
 
-	db.Table("book").AutoMigrate(&model.Book{})
+	db.Table("books").AutoMigrate(&model.Book{})
 
 	bookRepository := repository.NewBookRepositoryImpl(db)
 

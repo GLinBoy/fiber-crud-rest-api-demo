@@ -11,12 +11,6 @@ func NewRouter(router fiber.Router, bookService service.BookService) {
 		return c.SendString("Hello, Fiber!")
 	})
 
-	router.Use(func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "Path doesn't exist",
-		})
-	})
-
 	api := router.Group("/api")
 
 	books := api.Group("/books")
@@ -24,6 +18,12 @@ func NewRouter(router fiber.Router, bookService service.BookService) {
 	books.Get("", func(c *fiber.Ctx) error {
 		books := bookService.FindAll()
 		return c.JSON(books)
+	})
+
+	router.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"msg": "Path doesn't exist",
+		})
 	})
 
 }

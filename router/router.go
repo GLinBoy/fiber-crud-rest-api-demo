@@ -33,6 +33,14 @@ func NewRouter(router fiber.Router, bookService service.BookService) {
 		bookService.Save(book)
 		return c.SendStatus(fiber.StatusCreated)
 	})
+	books.Put("", func(c *fiber.Ctx) error {
+		var book model.Book
+		if err := c.BodyParser(&book); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
+		}
+		bookService.Update(book)
+		return c.SendStatus(fiber.StatusOK)
+	})
 
 	router.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{

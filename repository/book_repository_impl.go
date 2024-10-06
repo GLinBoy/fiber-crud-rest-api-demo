@@ -53,7 +53,7 @@ func (b BookRepositoryImpl) Update(book model.Book) {
 
 func (b BookRepositoryImpl) Delete(id int) {
 	var book model.Book
-	result := b.DB.Where("id = ?").Delete(&book)
+	result := b.DB.Where("id = ?", id).Delete(&book)
 	if result.Error != nil {
 		panic(result.Error)
 	}

@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/glinboy/fiber-crud-rest-api-demo/model"
 	"github.com/glinboy/fiber-crud-rest-api-demo/service"
 	"github.com/gofiber/fiber/v2"
 )
@@ -23,6 +24,14 @@ func NewRouter(router fiber.Router, bookService service.BookService) {
 		id, _ := c.ParamsInt("id")
 		book := bookService.FindById(id)
 		return c.JSON(book)
+	})
+	books.Post("", func(c *fiber.Ctx) error {
+		var book model.Book
+		if err := c.BodyParser(&book); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
+		}
+		bookService.Save(book)
+		return c.SendStatus(fiber.StatusCreated)
 	})
 
 	router.Use(func(c *fiber.Ctx) error {

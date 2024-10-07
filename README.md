@@ -27,3 +27,16 @@
       "description": "A sample book"
     }'
   ```
+
+- Update a book
+
+  ```bash
+  curl --location --request PUT 'localhost:8080/api/books' \
+  --header 'Content-Type: application/json' \
+  --data '{
+      "id": 1
+      "title": "Sample Book",
+      "author": "John Doe",
+      "description": "A sample book"
+    }'
+  ```

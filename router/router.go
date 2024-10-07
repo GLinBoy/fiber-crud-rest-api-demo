@@ -41,6 +41,11 @@ func NewRouter(router fiber.Router, bookService service.BookService) {
 		bookService.Update(book)
 		return c.SendStatus(fiber.StatusOK)
 	})
+	books.Delete("/:id<int>", func(c *fiber.Ctx) error {
+		id, _ := c.ParamsInt("id")
+		bookService.Delete(id)
+		return c.SendStatus(fiber.StatusNoContent)
+	})
 
 	router.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{

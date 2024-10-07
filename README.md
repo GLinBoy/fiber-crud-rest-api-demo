@@ -40,3 +40,9 @@
       "description": "A sample book"
     }'
   ```
+
+- Delete a book
+
+  ```bash
+  curl --location --request DELETE 'localhost:8080/api/books/1'
+  ```
